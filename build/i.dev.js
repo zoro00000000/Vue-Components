@@ -1,5 +1,4 @@
 'use strict'
-// TODO: V5.4 升级 node 插件需要自己引入，webpack不再统一引入了
 const process = require('process')
 const child_process = require('child_process')
 const fs = require('fs')
@@ -7,7 +6,8 @@ const utils = require('./utils')
 // 获取所有项目文件夹名
 const projectConfig = require('./project.config')
 
-utils.autoCompleteFun(projectConfig).then(res => {
+// TODO: 这里后续调整为 可以选择构建哪些个组件 来进行调试速度的提升
+utils.autoCompleteFun(projectConfig, true).then(res => {
     console.log('Run project name', res)
     console.log(process.env.NODE_ENV)
 

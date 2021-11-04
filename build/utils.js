@@ -48,12 +48,12 @@ exports.getFileNamesFun = (src = './release') => {
  * @param {*} projectConfig 
  * @returns 
  */
-exports.autoCompleteFun = (projectConfig) => {
+exports.autoCompleteFun = (projectConfig, multiple = false) => {
     return new Promise((resolve, reject) => {
         const prompt = new AutoComplete({
             name: 'Run Dev Server',
             message: '请选择要需要构建的项目！',
-            multiple: false,
+            multiple: multiple,
             limit: 50,
             initial: 0,
             choices: Object.keys(projectConfig)

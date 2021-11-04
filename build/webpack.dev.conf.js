@@ -1,7 +1,7 @@
 'use strict'
 
 const path = require('path')
-const webpack = require('webpack')
+// const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 
 const webpackBaseConf = require('./webpack.base.conf')
@@ -9,6 +9,11 @@ const webpackBaseConf = require('./webpack.base.conf')
 const config = require('../config')
 const projectName = require('./project')
 const projectConfig = require('./project.config')
+
+// 入口
+let entryPath = {
+    main: './examples/entry.js'
+}
 
 // 模块
 const modulesConfig = () => {
@@ -79,6 +84,7 @@ const pluginsConfig = () => {
 const webpackDevConf = {
     mode: config.dev.mode,
     devtool: config.dev.devtool,
+    entry: entryPath,
     output: outputConfig(),
     plugins: pluginsConfig(),
     // 性能优化2
