@@ -5,9 +5,9 @@
  */
 
 // 父集
-const homeComponent = () => import('./common/home')
+const homeComponent = () => import('../../../common/home.vue')
 // 子集
-const installComponent = () => import('./doc/install.md')
+const installComponent = () => import('../../docs/install.md')
 
 const router = [
     {

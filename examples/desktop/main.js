@@ -1,11 +1,7 @@
 import Vue from 'vue'
 
-// import {
-//     Toast,
-//     Lazyload
-// } from 'vant'
 import router from './routers'
-import store from './store'
+// import store from './store'
 import App from './App'
 // import './assets/style/main.scss'
 
@@ -22,6 +18,6 @@ compoments.forEach(component => {
 
 new Vue({
     render: h => h(App),
-    router,
-    store
+    router
+    // store
 }).$mount('#app')

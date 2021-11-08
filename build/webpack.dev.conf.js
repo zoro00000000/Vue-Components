@@ -7,13 +7,11 @@ const { merge } = require('webpack-merge')
 const webpackBaseConf = require('./webpack.base.conf')
 // 引入项目文件属性
 const config = require('../config')
-const projectName = require('./project')
-const projectConfig = require('./project.config')
 
 // 入口
-let entryPath = {
-    main: './examples/entry.js'
-}
+// let entryPath = {
+//     main: './examples/entry.js'
+// }
 
 // 模块
 const modulesConfig = () => {
@@ -61,7 +59,7 @@ const modulesConfig = () => {
 const outputConfig = () => {
     let output = {
         // 如果有项目名 输出单个项目
-        path: projectName.name ? path.join(__dirname, projectConfig.outputDir) : path.join(__dirname, '../dist'),
+        path: path.join(__dirname, '../dist'),
         filename: '[name].js',
         chunkFilename: '[name].js',
         // 性能优化1
@@ -84,7 +82,7 @@ const pluginsConfig = () => {
 const webpackDevConf = {
     mode: config.dev.mode,
     devtool: config.dev.devtool,
-    entry: entryPath,
+    // entry: entryPath,
     output: outputConfig(),
     plugins: pluginsConfig(),
     // 性能优化2

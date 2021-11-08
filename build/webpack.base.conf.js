@@ -12,9 +12,6 @@ const webpack = require('webpack')
 const process = require('process')
 // 引入项目文件属性
 const utils = require('./utils')
-// const config = require('../config')
-const projectName = require('./project')
-const projectConfig = require('./project.config')
 
 // 初始化 node Env
 utils.initNodeEnv()
@@ -28,55 +25,26 @@ utils.initNodeEnv()
 //     }
 // }
 
-let entryPath = {}
-let HTMLPlugin = []
-// 如果有项目名 输出单个项目
-if (projectName.name) {
-    entryPath = {
-        main: projectConfig.entry + 'main.js'
-    }
-    HTMLPlugin = [
-        new HtmlWebpackPlugin({
-            template: projectConfig.template + 'index.html',
-            title: projectConfig.fileName + 'page',
-            // filename: projectConfig.fileName + '.html',
-            filename: 'index.html',
-            hash: false,
-            inject: true,
-            minify: {
-                removeComments: true,
-                collapseWhitespace: true
-                // more options:
-                // https://github.com/kangax/html-minifier#options-quick-reference
-            }
-        })
-    ]
-} else {
-    for (const key in projectConfig) {
-        if (projectConfig.hasOwnProperty(key)) {
-            const element = projectConfig[key]
-            entryPath[key] = element.entry + 'main.js'
-
-            HTMLPlugin.push(
-                new HtmlWebpackPlugin({
-                    template: element.template + 'index.html',
-                    title: element.fileName + ' page',
-                    // filename: element.fileName + '.html',
-                    filename: (process.env.VUE_APP_BUILD_ENV === 'staging' ? element.fileName + '-pre' : element.fileName) + '/index.html',
-                    // chunks: [ 'vendors', element.fileName ],
-                    inject: true,
-                    minify: {
-                        removeComments: true,
-                        collapseWhitespace: true
-                        // more options:
-                        // https://github.com/kangax/html-minifier#options-quick-reference
-                    },
-                    hash: false
-                })
-            )
-        }
-    }
+let entryPath = {
+    desktop: path.resolve(__dirname, '../examples/desktop/main.js')
 }
+
+let HTMLPlugin = [
+    new HtmlWebpackPlugin({
+        template: path.resolve(__dirname, '../examples/desktop/index.html'),
+        title: 'desktop page',
+        filename: 'index.html',
+        publicPath: './desktop',
+        hash: false,
+        inject: true,
+        minify: {
+            removeComments: true,
+            collapseWhitespace: true
+            // more options:
+            // https://github.com/kangax/html-minifier#options-quick-reference
+        }
+    })
+]
 
 // 模块
 const moduleConfig = () => {
@@ -144,6 +112,22 @@ const moduleConfig = () => {
                     },
                     // conditionalCompiler
                 ]
+            },
+            {
+                test: /\.md$/,
+                use: [
+                    {
+                        loader: 'vue-loader',
+                        options: {
+                            compilerOptions: {
+                                preserveWhitespace: false,
+                            },
+                        },
+                    },
+                    {
+                        loader: path.resolve(__dirname, './md-loader/index.js'),
+                    },
+                ],
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
