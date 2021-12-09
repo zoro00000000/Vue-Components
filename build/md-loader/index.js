@@ -8,13 +8,13 @@ const md = require('./config')
 module.exports = function(source) {
     const content = md.render(source)
 
-    const startTag = '<!--element-demo:'
+    const startTag = '<!--element-com-demo:'
     const startTagLen = startTag.length
-    const endTag = ':element-demo-->'
+    const endTag = ':element-com-demo-->'
     const endTagLen = endTag.length
 
     let componenetsString = ''
-    let id = 0 // demo 的 id
+    let id = 0 // com-demo 的 id
     let output = [] // 输出的内容
     let start = 0 // 字符串开始位置
 
@@ -38,7 +38,7 @@ module.exports = function(source) {
         commentEnd = content.indexOf(endTag, commentStart + startTagLen)
     }
 
-    // 仅允许在 demo 不存在时，才可以在 Markdown 中写 script 标签
+    // 仅允许在 com-demo 不存在时，才可以在 Markdown 中写 script 标签
     // todo: 优化这段逻辑
     let pageScript = ''
     if (componenetsString) {

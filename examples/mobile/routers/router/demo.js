@@ -1,6 +1,6 @@
 /**
  * ! 路由
- * ? demo
+ * ? com-demo
  * @param {}
  */
 
@@ -8,12 +8,12 @@ const demoComponent = () => import('../../pages/demo')
 
 const router = [
     {
-        path: '/demo',
+        path: '/com-demo',
         name: '/demo',
         component: demoComponent,
         meta: {
             keepAlive: false,
-            title: 'demo 项目页面'
+            title: 'com-demo 项目页面'
         }
     }
 ]

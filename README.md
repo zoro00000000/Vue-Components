@@ -59,20 +59,22 @@
     ┗━  README.md
 ```
 
-## 未完成 的 插件配置 ##
+## 编写 md-loader ##
 
 ```
-✅ html-webpack-plugin
--- html-webpack-template
-✅ remove webpack-clean-plugin这个插件 使用 node 命令删除dist文件夹 
-✅ terser-webpack-plugin
-✅ babel-plugin-jsx-v-model 支持 v-model 命令
+基于：
+node.js (path, fs, os)
+loader-utils
+front-matter
+markdown-it
+markdown-it-anchor
+transliteration
+highlight.js
 ```
 
 ## 不确定是否使用的插件 ##
 
 ```
--- !@babel/cli
 ```
 
 ## 待完成的优化配置 ##
@@ -128,25 +130,11 @@
 ### 重点注意 ###
 
 ```
-✅ 本地调试时 接口需要配置host 改为同域名 + 同端口，80端口
-✅ webpack 在配置 jsx 文件解析的时候，填写 include 属性无法编译
-✅ 引入 jsx 配置后，样式引入有问题
-❗️ 不能模块化引入样式，vue-style-loader 无法解析
-❌ 引入 tsx 配置
-✅ 测试/预发环境代码上传
-✅ css-loader 升级到V6版本后导致字体包丢失的问题
 ```
 
 **未来计划**
 
 ```
-❗️ 工具方法的迭代完善（持续进行中）
-❌ 修改 webpack 配置，基于 router 打包多个 html 文件（html-webpack-plugin）实现
-❌ 将 vite 引入到项目中进行 HMR 处理，继续优化 webpack5
-❌ ❌ 升级至 vue3（需要单独一套架子模板，暂时放弃因为proxy兼容需要ios10以上）❌
-❌ 服务器端渲染 vs 预渲染（SSR vs Prerendering）
-❌ 瀑布流 通用组件封装 兼容性良好
-✅ 修改项目发布策略 每次发版合并带有上一次版本包
 ```
 
 ### 架子修改为 多项目架构 ###

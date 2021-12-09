@@ -15,7 +15,7 @@ module.exports = md => {
                     <!--element-demo: ${content}:element-demo-->
                 `
             }
-            return '</demo-block>'
+            return '</com-demo-block>'
         }
     })
 

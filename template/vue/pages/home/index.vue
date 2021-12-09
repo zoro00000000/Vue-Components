@@ -5,7 +5,7 @@
             <img src="../../assets/img/success_img.png" />
         </div>
         <div class="main-btn" @click="jumpPage('/test')">点击跳转到 test 页面</div>
-        <div class="main-btn" @click="jumpPage('/demo')">点击跳转到 demo 页面</div>
+        <div class="main-btn" @click="jumpPage('/com-demo')">点击跳转到 demo 页面</div>
         <div class="main-title">这就是首页哦 上传打包测试</div>
         <div class="main-img"></div>
 

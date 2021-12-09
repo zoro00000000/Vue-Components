@@ -40,12 +40,12 @@ const wrapper = content => {
             <section v-html="content"></section>
         </template>
         <script>
-            export default {
-                created () {
-                    this.content = unescape(\`${content}\`)
-                },
-                ${sharedVueOptions}
-            }
+        export default {
+            created () {
+                this.content = unescape(\`${content}\`)
+            },
+            ${sharedVueOptions}
+        }
         </script>
         `
     }
@@ -59,12 +59,12 @@ const wrapper = content => {
         </section>
     </template>
     <script>
-        ${demoLinks.map(link => `import DemoCode${camelize(path.basename(link, '.vue'))} from '${link}'`).join('\n')}
-        export default {
-            components: {
-                ${demoLinks.map(link => `DemoCode${camelize(path.basename(link, '.vue'))}`).join(',')}
-            },
-            ${sharedVueOptions}
+    ${demoLinks.map(link => `import DemoCode${camelize(path.basename(link, '.vue'))} from '${link}'`).join('\n')}
+    export default {
+        components: {
+        ${demoLinks.map(link => `DemoCode${camelize(path.basename(link, '.vue'))}`).join(',')}
+        },
+        ${sharedVueOptions}
         }
     </script>
     ${styles.join('\n')}

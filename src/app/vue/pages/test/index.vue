@@ -4,7 +4,7 @@
         <div class="text-img">
             <img src="../../assets/img/test.jpg" />
         </div>
-        <div class="test-btn" @click="jumpPage('/demo')">点击跳转到 demo 页面</div>
+        <div class="test-btn" @click="jumpPage('/com-demo')">点击跳转到 demo 页面</div>
         <div class="test-btn" @click="jumpPage('/')">点击跳转到 main 页面</div>
         <div class="text-icon"></div>
     </div>
