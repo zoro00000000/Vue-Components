@@ -4,11 +4,11 @@ const { slugify } = require('transliteration')
 const highlight = require('./highlight')
 
 const parser = new MarkdownIt({
-    html: true,
-    highlight
+  html: true,
+  highlight
 }).use(markdownItAnchor, {
-    level: 2,
-    slugify
+  level: 2,
+  slugify
 })
 
 module.exports = parser

@@ -2,73 +2,74 @@
  * ? 版本号对比方法
  * @param {String} v1：版本号1
  * @param {String} v2：版本号2
- * @returns 
+ * @returns
  */
 export const versionContrast = (v1, v2) => {
-    if (!v1 || !v2) return -1
+  if (!v1 || !v2) return -1
 
-    let result = 0
-    v2 = v2.split('.')
-    v1.split('.').some((n, i) => {
-        result = n - v2[i]
-        return result
+  let result = 0
+  v2 = v2.split('.')
+  v1.split('.')
+    .some((n, i) => {
+      result = n - v2[i]
+      return result
     })
-    return result
+  return result
 }
 
 /**
  * ? 金融app 内 从ua信息中获取版本号
- * @param {String} name 
- * @returns 
+ * @param {String} name
+ * @returns
  */
 export const getJrAppVersion = (name = 'clientversion') => {
-    const reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`)
-    const ua = navigator.userAgent.toLowerCase()
-    return ua.match(reg)[2]
+  const reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`)
+  const ua = navigator.userAgent.toLowerCase()
+  return ua.match(reg)[2]
 }
 
 /**
  * ? 获取 sessionStorage 里的属性
  * @param {String} name: sessionStorage 的 key
- * @returns 
+ * @returns
  */
 export const getStorage = name => {
-    if (sessionStorage[name] && sessionStorage[name] !== 'undefined') {
-        return JSON.parse(sessionStorage[name])
-    } else {
-        return false
-    }
+  if (sessionStorage[name] && sessionStorage[name] !== 'undefined') {
+    return JSON.parse(sessionStorage[name])
+  } else {
+    return false
+  }
 }
 
 /**
  * ? 获取字符串中数字
  * @param {String} str：包含数字的字符串
- * @returns 
+ * @returns
  */
 export const getNumInString = str => {
-    if (typeof str === 'string') {
-        const num = str.replace(/[^0-9]/ig, '')
-        return num
-    } else if (typeof str === 'number') {
-        return str
-    } else {
-        return undefined
-    }
+  if (typeof str === 'string') {
+    const num = str.replace(/[^0-9]/ig, '')
+    return num
+  } else if (typeof str === 'number') {
+    return str
+  } else {
+    return undefined
+  }
 }
 
 // TODO: 需修改版本
 /**
  * ? 图片 URL 拼接
- * @param {String} url 
- * @returns 
+ * @param {String} url
+ * @returns
  */
 export function jointImgUrl (url) {
-    const reg = RegExp(/http/)
-    if (reg.test(url)) {
-        return url
-    } else {
-        return `https://m.360buyimg.com/jrqb/${url}`
-    }
+  const reg = RegExp(/http/)
+  if (reg.test(url)) {
+    return url
+  } else {
+    return `https://m.360buyimg.com/jrqb/${url}`
+  }
 }
 
 // /**
@@ -83,7 +84,7 @@ export function jointImgUrl (url) {
 //         '"': '&quot;',
 //         '&': '&amp;'
 //     }
-    
+
 //     // 特殊字符转换
 //     const escapeChar = a => ESC[a] || a
 //     const escape = s => s.replace(/[<>"&]/g, escapeChar)
@@ -113,17 +114,17 @@ export function jointImgUrl (url) {
 
 /**
  * ? 内容复制
- * @param {String} content 
- * @param {String} toastDesc 
+ * @param {String} content
+ * @param {String} toastDesc
  */
 export const copy = (content, toastDesc = '复制成功') => {
-    const inputDom = document.createElement('input')
-    inputDom.setAttribute('readonly', 'readonly')
-    inputDom.setAttribute('value', content)
-    inputDom.style = 'opacity: 0'
-    document.body.appendChild(inputDom)
-    inputDom.select()
-    document.execCommand('Copy')
-    document.body.removeChild(inputDom)
-    console.log(toastDesc)
+  const inputDom = document.createElement('input')
+  inputDom.setAttribute('readonly', 'readonly')
+  inputDom.setAttribute('value', content)
+  inputDom.style = 'opacity: 0'
+  document.body.appendChild(inputDom)
+  inputDom.select()
+  document.execCommand('Copy')
+  document.body.removeChild(inputDom)
+  console.log(toastDesc)
 }

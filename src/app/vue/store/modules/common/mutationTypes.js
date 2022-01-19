@@ -1,5 +1,0 @@
-const SET_COMMON_DATA = 'SET_COMMON_DATA'
-
-export {
-    SET_COMMON_DATA
-}

@@ -12,27 +12,27 @@
 */
 
 import {
-    isWechat,
-    isAppleDevices,
-    isAndroidDevices
+  isWechat,
+  isAppleDevices,
+  isAndroidDevices
 } from './webviewTester'
 
 // 增加 appType
 function addAppType (obj) {
-    if (isWechat()) {
-        // wechat_h5
-        obj.appType = 10
-    } else if (isAppleDevices()) {
-        // IOS_h5
-        obj.appType = 1
-    } else if (isAndroidDevices()) {
-        // android_h5
-        obj.appType = 3
-    } else {
-        // h5
-        obj.appType = 6
-    }
-    return obj
+  if (isWechat()) {
+    // wechat_h5
+    obj.appType = 10
+  } else if (isAppleDevices()) {
+    // IOS_h5
+    obj.appType = 1
+  } else if (isAndroidDevices()) {
+    // android_h5
+    obj.appType = 3
+  } else {
+    // h5
+    obj.appType = 6
+  }
+  return obj
 }
 
 /**
@@ -40,59 +40,59 @@ function addAppType (obj) {
  *
  * @param {string} [bizid='JD-JDJK-YXHD']
  * @param {number} [timeNum=10]
- * @return {*} 
+ * @return {*}
  */
 const getSDKToken = (bizid = 'JD-JDJK-YXHD', timeNum = 10) => {
-    const ua = navigator.userAgent.toLowerCase()
-    // 产品提供
-    const bp_bizid = bizid 
-    let risk_jd
-    let times = timeNum
-    
-    return new Promise((resolve, reject) => {
-        const timer = setInterval(() => {
-            times -= 1
-            
-            try {
-                risk_jd = getJdEid()
-                // 注意：调用getJdEid应该放在加载m.js之后
-                // 如果在金融App或商城App打开，需要获取设备原生信息，建议使用以下方法，返回字段详见下方列表
-                // (@20201118 huwei111备注：只调用getJdEid即可，不需要调用getEidJoint)
-                // risk_jd = getEidJoint();
-                
-                // 在金融app 或者 京东app 内的时候才会有 sdkToken
-                if (ua.includes('jdjr-app') || ua.includes('jdjr-app')) {
-                    // console.log('京东/金融app环境：', times)
-                    if (risk_jd.sdkToken) {
-                        clearInterval(timer)
-                        // 将数据存储到 sessionStorage 中
-                        let str = JSON.stringify(addAppType(risk_jd))
-                        // return str
-                        resolve(str)
-                    }
-                } else {
-                    // console.log('非京东/金融app环境：', times)
-                    clearInterval(timer)
-                    // 将数据存储到 sessionStorage 中
-                    let str = JSON.stringify(addAppType(risk_jd))
-                    // return str
-                    resolve(str)
-                }
-            } catch (e) {
-                // 出现异常没有数据的情况
-            }
-    
-            if (times <= 0) {
-                // console.log('已到0次返回结果不再循环')
-                clearInterval(timer)
-                // risk_jd = addAppType(risk_jd)
-                // return risk_jd
-                let str = JSON.stringify(addAppType(risk_jd))
+  const ua = navigator.userAgent.toLowerCase()
+  // 产品提供
+  const bp_bizid = bizid
+  let risk_jd
+  let times = timeNum
 
-                resolve(str)
-            }
-        }, 100)
-    })
+  return new Promise((resolve, reject) => {
+    const timer = setInterval(() => {
+      times -= 1
+
+      try {
+        risk_jd = getJdEid()
+        // 注意：调用getJdEid应该放在加载m.js之后
+        // 如果在金融App或商城App打开，需要获取设备原生信息，建议使用以下方法，返回字段详见下方列表
+        // (@20201118 huwei111备注：只调用getJdEid即可，不需要调用getEidJoint)
+        // risk_jd = getEidJoint();
+
+        // 在金融app 或者 京东app 内的时候才会有 sdkToken
+        if (ua.includes('jdjr-app') || ua.includes('jdjr-app')) {
+          // console.log('京东/金融app环境：', times)
+          if (risk_jd.sdkToken) {
+            clearInterval(timer)
+            // 将数据存储到 sessionStorage 中
+            let str = JSON.stringify(addAppType(risk_jd))
+            // return str
+            resolve(str)
+          }
+        } else {
+          // console.log('非京东/金融app环境：', times)
+          clearInterval(timer)
+          // 将数据存储到 sessionStorage 中
+          let str = JSON.stringify(addAppType(risk_jd))
+          // return str
+          resolve(str)
+        }
+      } catch (e) {
+        // 出现异常没有数据的情况
+      }
+
+      if (times <= 0) {
+        // console.log('已到0次返回结果不再循环')
+        clearInterval(timer)
+        // risk_jd = addAppType(risk_jd)
+        // return risk_jd
+        let str = JSON.stringify(addAppType(risk_jd))
+
+        resolve(str)
+      }
+    }, 100)
+  })
 }
 
 export default getSDKToken

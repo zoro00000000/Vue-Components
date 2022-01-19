@@ -8,7 +8,7 @@ charset = utf-8
 # 缩进格式
 indent_style = space
 # 使用4个空格缩进
-indent_size = 4
+indent_size = 2
 # 换行格式
 end_of_line = lf
 # 在代码最后添加一行空行
@@ -17,7 +17,7 @@ insert_final_newline = false
 trim_trailing_whitespace = false
 
 [*.json]
-indent_size = 4
+indent_size = 2
 
 [*.md]
 trim_trailing_whitespace = false

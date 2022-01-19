@@ -12,16 +12,16 @@ import * as Time from './timepiece'
 import GetSDKToken from './getSDKToken'
 
 export {
-    Tools,
-    WebviewTester,
-    Tracker,
-    TransformLink,
-    GeneralJSBridge,
-    Lodash,
-    CC,
-    Load,
-    Handler,
-    URLParams,
-    Time,
-    GetSDKToken
+  Tools,
+  WebviewTester,
+  Tracker,
+  TransformLink,
+  GeneralJSBridge,
+  Lodash,
+  CC,
+  Load,
+  Handler,
+  URLParams,
+  Time,
+  GetSDKToken
 }

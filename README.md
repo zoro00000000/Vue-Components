@@ -6,28 +6,43 @@
 ## 项目结构 ##
 
 ```
-━━Vue project━━
-    ┣━build
-    ┃   ┣━ webpack的配置文件
-    ┃   ┗━ 其他辅助文件
-    ┣━config
-    ┃   ┗━ 各环境基础配置文件
-    ┣━docker
-    ┃   ┗━ JD docker构建配置文件
+━━Vue Components project━━
+    ┣━components
+    ┃   ┣━ com-demo
+    ┃   ┣━ style
+    ┃   ┗━ README.md
+    ┣━examples
+    ┃   ┣━ common
+    ┃   ┣━ desktop
+    ┃   ┣━ mobile
+    ┃   ┗━ README.md
+    ┣━packages
+    ┃   ┣━ corrci-cli
+    ┃   ┃   ┣━ config
+    ┃   ┃   ┣━ src
+    ┃   ┃   ┗━ README.md
+    ┃   ┣━ corrci-md-loader
+    ┃   ┃   ┣━ src
+    ┃   ┃   ┃   ┣━ card-wrapper.js
+    ┃   ┃   ┃   ┣━ extract-demo.js
+    ┃   ┃   ┃   ┣━ highlight.js
+    ┃   ┃   ┃   ┣━ index.js
+    ┃   ┃   ┃   ┣━ link-open.js
+    ┃   ┃   ┃   ┣━ md-parser.js
+    ┃   ┃   ┃   ┗━ side-effect-tags.js
+    ┃   ┗━  ┗━ README.md
     ┣━public
     ┃   ┗━ HTML 文件 (dev-server使用)
-    ┣━VCM
-    ┃   ┗━ Version Control Management 版本控制管理
     ┣━src
     ┃   ┣━ base
     ┃   ┃   ┗━ font 通用字体引入
     ┃   ┣━ app
     ┃   ┃   ┗━ 所有子项目的文件夹
-    ┃   ┗━ server
+    ┃   ┣━ server
     ┃   ┃   ┗━ http 请求方法1
-    ┃   ┗━ services
+    ┃   ┣━ services
     ┃   ┃   ┗━ http 请求方法2
-    ┃   ┗━ utils
+    ┃   ┣━ utils
     ┃   ┃   ┣━ generalJSBridge 统一桥方法
     ┃   ┃   ┣━ layout 通用UI组件
     ┃   ┃   ┣━ lodash 节流/防抖
@@ -45,7 +60,7 @@
     ┣━static
     ┃   ┗━ 无需构建的静态文件
     ┣━template
-    ┃   ┗━ vue 项目基础模板
+    ┃   ┗━ 项目基础模板
     ┣━  .browserslistrc
     ┣━  .editorconfig
     ┣━  .env
@@ -54,8 +69,11 @@
     ┣━  .gitgnore
     ┣━  .prettierignore
     ┣━  .babel.config.js
+    ┣━  compoments.json
     ┣━  package.json
+    ┣━  package-lock.json
     ┣━  postcss.config.js
+    ┣━  stylelint.config.js
     ┗━  README.md
 ```
 
@@ -82,15 +100,6 @@ highlight.js
 ```
 -- 将所有配置参数提取到 config 文件中
 -- 代码压缩配置
-```
-
-## vue + vue-router + vuex + axios 的配置
-
-```
-✅ vue
-✅ vue-router
-✅ vuex
-✅ axios
 ```
 
 ## 项目依赖 安装 ##
@@ -139,7 +148,7 @@ highlight.js
 
 ### 架子修改为 多项目架构 ###
 
-### utils widge ###
+### utils widget ###
 
 ```
 ❌ masonry     瀑布流

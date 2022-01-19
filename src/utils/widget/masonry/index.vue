@@ -1,13 +1,13 @@
 <template>
-    <div class="masonry-container">
+  <div class="masonry-container">
 
-    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: 'masonry'
-    }
+export default {
+  name: 'masonry'
+}
 </script>
 
 <style lang="scss" scoped>
