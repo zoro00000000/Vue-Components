@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App'
-import router from './routers'
+import router from './router'
 import { scrollToAnchor } from './utils'
 import DemoPlayground from './components/DemoPlayground'
 

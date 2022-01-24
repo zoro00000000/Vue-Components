@@ -1,40 +1,41 @@
-import { Compiler } from 'webpack'
-import { getStyleDepsMap } from './get-style-deps-map'
-import { getPackageEntry } from './get-package-entry'
-import { getPackageStyle } from './get-package-style'
-import { getSiteDesktopShared } from './get-site-desktop-shared'
-import { PACKAGE_ENTRY_FILE, PACKAGE_STYLE_FILE } from '../common/constant'
+// const { getStyleDepsMap } = require('./get-style-deps-map')
+// // const { getPackageStyle } = require('./get-package-style')
+// // const { getSiteDesktopShared } = require('./get-site-desktop-shared')
+const { 
+  PACKAGE_ENTRY_FILE
+  // PACKAGE_STYLE_FILE
+} = require('../common/state')
+
+const { setPackageEntry } = require('./set-package-entry')
+const { setDesktopDeploy } = require('./set-desktop-deploy')
 
 const PLUGIN_NAME = 'CorrciCliSitePlugin'
 
-export async function getSiteEntry () {
+async function setSiteEntry () {
   return new Promise((resolve, reject) => {
-    getStyleDepsMap().then(() => {
-      // TODO: package-entry.js 
-      getPackageEntry({
-        outputFile: PACKAGE_ENTRY_FILE
-      })
-      // TODO: package-style.css
-      // getPackageStyle({
-      //   outputFile: PACKAGE_STYLE_FILE
-      // })
-      // site-desktop-shared.js
-      getSiteDesktopShared()
-      resolve()
-    }).catch(err => {
-      console.log(err)
-      reject(err)
+    // package-entry.js
+    setPackageEntry({
+      outputPath: PACKAGE_ENTRY_FILE
     })
+    // desktop-deploy.js
+    setDesktopDeploy()
+    resolve()
   })
-} 
+}
 
 /*
+ * 自定义 webpack 插件
  * 根据 corrci.config.js 文件 提取配置项到新文件中。
  */
-export const CorrciCliSitePlugin = (compiler = Compiler) => {
-  if (process.env.NODE_ENV === 'production') {
-    compiler.hooks.beforeCompile.tapPromise(PLUGIN_NAME, getSiteEntry)
-  } else {
-    compiler.hooks.watchRun.tabPromise(PLUGIN_NAME, getSiteEntry)
+class CorrciCliSitePlugin {
+  // eslint-disable-next-line class-methods-use-this
+  apply (compiler) {
+    if (process.env.NODE_ENV === 'production') {
+      compiler.hooks.beforeCompile.tapPromise(PLUGIN_NAME, setSiteEntry)
+    } else {
+      compiler.hooks.watchRun.tapPromise(PLUGIN_NAME, setSiteEntry)
+    }
   }
 }
+
+exports.CorrciCliSitePlugin = CorrciCliSitePlugin

@@ -16,16 +16,17 @@ const options = {
   },
   compress: config.dev.compress, // 开启gzip
   // 支持 history 路由模式
-  historyApiFallback: true,
+  // historyApiFallback: true,
   hot: config.dev.hot,
   https: config.dev.https,
   liveReload: false,
-  open: {
-    app: {
-      name: 'Google Chrome',
-      arguments: ['--incognito', '--new-window']
-    }
-  },
+  // TODO: 临时注释
+  // open: {
+  //   app: {
+  //     name: 'Google Chrome',
+  //     arguments: ['--incognito', '--new-window']
+  //   }
+  // },
   allowedHosts: config.dev.allowedHosts,
   proxy: config.dev.proxy
 }

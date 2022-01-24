@@ -4,13 +4,14 @@
 const path = require('path')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const chalk = require('chalk')
-// const fs = require('fs')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const webpack = require('webpack')
 const process = require('process')
 // 引入项目文件属性 
 const utils = require('./utils')
+const { SET_DESKTOP_DEPLOY_FILE } = require('../common/state') 
+const { CorrciCliSitePlugin } = require('../compiler/corrci-cli-site-plugin')
 
 // 初始化 node Env
 utils.initNodeEnv()
@@ -22,10 +23,10 @@ const entryPath = {
 
 const HTMLPlugin = [
   new HtmlWebpackPlugin({
-    template: path.resolve(__dirname, '../site/desktop/index.html'),
+    template: path.join(__dirname, '../site/desktop/index.html'),
     title: 'desktop page',
     filename: 'index.html',
-    publicPath: './',
+    // publicPath: './',
     hash: false,
     inject: true,
     minify: {
@@ -162,7 +163,7 @@ const resolveConfig = () => ({
     '@': path.resolve('src/app'),
     '@utils': path.resolve('src/utils'),
     '@base': path.resolve('src/base'),
-    // 'site-desktop-shared': SITE_DESKTOP_SHARED_FILE
+    'set-desktop-deploy': SET_DESKTOP_DEPLOY_FILE
   }
 })
 
@@ -179,8 +180,8 @@ const pluginsConfig = () => {
       'process.env.VUE_APP_BUILD_ENV': JSON.stringify(process.env.VUE_APP_BUILD_ENV)
     }),
     new VueLoaderPlugin(),
-    // 引入 plugin 提前根据配置文件生成 entry 文件
-    // new CorrciCliSitePlugin()
+    // 引入 plugin 提前根据配置文件生成 entry 文件 
+    new CorrciCliSitePlugin()
   ]
 
   return [].concat(HTMLPlugin, basePlugin)

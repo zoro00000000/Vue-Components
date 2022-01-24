@@ -14,8 +14,7 @@
 </template>
 
 <script>
-// TODO: 需要修改这里
-import { config, packageVersion } from './site-desktop-shared'
+import { config, packageVersion } from 'set-desktop-deploy'
 import corrciDoc from './components'
 import { setLang } from '../common/locales'
 
@@ -32,10 +31,16 @@ export default {
       hasSimulator: true
     }
   },
+  beforeCreate () {
+    // console.log('----------------')
+    // console.log(config)
+    // console.log(packageVersion)
+    // console.log('----------------')
+  },
   computed: {
     lang () {
       const { lang } = this.$route.meta
-      return lang || ''
+      return lang || 'zh-CN'
     },
     langConfigs () {
       const { locales = {} } = config.site

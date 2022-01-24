@@ -1,58 +1,49 @@
-import { join, isAbsolute } from 'path'
-import { get } from 'lodash'
-import { existsSync } from 'fs'
+const {
+  // readdirSync,
+  existsSync,
+  readFileSync,
+  writeFile
+} = require('fs')
 
-function findRootDir (dir) {
-  if (existsSync(join(dir, 'coccri.config.js'))) {
-    return dir
-  }
+const camelizeRE = /-(\w)/g
+const pascalizeRE = /(\w)(\w*)/g
+
+function camelize (str) {
+  return str.replace(camelizeRE, (_, c) => c.toUpperCase())
 }
 
-// path
-export const CWD = process.cwd()
-export const ROOT = findRootDir(CWD)
-export const DOCS_DIR = join(ROOT, 'docs')
-export const PACKAGE_JSON_FILE = join(ROOT, 'package.json')
-export const CORRCI_CONFIG_FILE = join(ROOT, 'corrci.config.js')
-export const DIST_DIR = join(__dirname, '../../dist')
-
-// dist
-export const PACKAGE_ENTRY_FILE = join(DIST_DIR, 'package-entry.js')
-export const PACKAGE_STYLE_FILE = join(DIST_DIR, 'package-style.css')
-export const SITE_DESKTOP_SHARED_FILE = join(DIST_DIR, 'site-desktop-shared.js')
-
-export const STYPE_DEPS_JSON_FILE = join(DIST_DIR, 'style-deps.json')
-
-// files
-export const SCRIPT_EXTS = ['.js', '.jsx', '.ts', '.tsx', '.vue']
-
-export function getCorrciConfig () {
-  delete require.cache(CORRCI_CONFIG_FILE)
-  
-  try {
-    // return require(CORRCI_CONFIG_FILE)
-    return require.context(CORRCI_CONFIG_FILE, true)
-  } catch (err) {
-    return {}
-  }
+function removeExt (path) {
+  return path.replace('.js', '')
 }
 
-/*
- * 获取文件路径方法
- */
-const getSrcDir = () => {
-  const corrciConfig = getCorrciConfig()
-  const srcDir = get(corrciConfig)
-  
-  if (srcDir) {
-    if (isAbsolute(srcDir)) {
-      return srcDir
+function normalizePath (path) {
+  return path.replace(/\\/g, '/')
+}
+
+function pascalize (component) {
+  return camelize(component).replace(
+    pascalizeRE,
+    (_, c1, c2) => c1.toUpperCase() + c2
+  )
+}
+
+// 导出文件
+function outputFile (filePath, content) {
+  if (existsSync(filePath)) {
+    const previousContent = readFileSync(filePath, 'utf-8')
+
+    if (previousContent === content) {
+      return
     }
-
-    return join(ROOT, srcDir)
   }
 
-  return join(ROOT, 'src')
+  writeFile(filePath, content, err => {
+    if (err) throw err
+    console.log(`生成文件成功！！！！${filePath}`)
+  })
 }
 
-export const SRC_DIR = getSrcDir()
+exports.removeExt = removeExt
+exports.normalizePath = normalizePath
+exports.pascalize = pascalize
+exports.outputFile = outputFile

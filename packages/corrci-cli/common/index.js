@@ -1,24 +1,26 @@
-import {
+const {
   readdirSync,
   existsSync,
   readFileSync,
   writeFile
-} from 'fs'
-import { join } from 'path'
+} = require('fs')
+const { join } = require('path')
 
-import { 
+const { 
   SRC_DIR,
   PACKAGE_JSON_FILE
-} from './constant'
+} = require('./constant')
 
-export const ENTRY_EXTENDS = ['js', 'ts', 'tsx', 'jsx', 'vue']
+const ENTRY_EXTENDS = ['js', 'ts', 'tsx', 'jsx', 'vue']
+exports.ENTRY_EXTENDS = ENTRY_EXTENDS
 
 // 
-export function hasDefaultExport (code) {
+function hasDefaultExport (code) {
   return code.includes('export default') || code.includes('export { default }')
 }
+exports.hasDefaultExport = hasDefaultExport
 
-export function getComponents () {
+function getComponents () {
   const EXCLUDE = ['.DS_Store']
   const dirs = readdirSync(SRC_DIR)
   return dirs
@@ -31,8 +33,9 @@ export function getComponents () {
       return false
     }))
 }
+exports.getComponents = getComponents
 
-export function smartOutputFile (filePath, content) {
+function smartOutputFile (filePath, content) {
   if (existsSync(filePath)) {
     const previousContent = readFileSync(filePath, 'utf-8')
     
@@ -43,34 +46,40 @@ export function smartOutputFile (filePath, content) {
 
   writeFile(filePath, content)
 }
+exports.smartOutputFile = smartOutputFile
 
 const camelizeRE = /-(\w)/g
 const pascalizeRE = /(\w)(\w*)/g
 
-export function camelize (str) {
+function camelize (str) {
   return str.replace(
     camelizeRE,
     (_, c) => c.toUpperCase()
-  )
+  ) 
 }
+exports.camelize = camelize
 
-export function pascalize (str) {
+function pascalize (str) {
   return camelize(str).replace(
     pascalizeRE,
     (_, c1, c2) => c1.toUpperCase() + c2
   )
 }
+exports.pascalize = pascalize
 
-export function normalizePath (path) {
+function normalizePath (path) {
   return path.replace(/\\/g, '/')
 }
+exports.normalizePath = normalizePath
 
-export function removeExt (path) {
+function removeExt (path) {
   return path.replace('.js', '')
 }
+exports.removeExt = removeExt
 
-export function getPackageJson () {
+function getPackageJson () {
   delete require.cache[PACKAGE_JSON_FILE]
 
   return require.context(PACKAGE_JSON_FILE, true)
 }
+exports.getPackageJson = getPackageJson
