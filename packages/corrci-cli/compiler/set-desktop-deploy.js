@@ -92,17 +92,17 @@ function resolveDocuments (components) {
   ]
 }
 
-function genExportConfig () {
+function getExportConfig () {
   return 'export { config }'
 }
 
-function genExportDocuments (items) {
+function getExportDocuments (items) {
   return `export const documents = {
   ${items.map(item => item.name).join(',\n  ')}
 }`
 }
 
-function genExportVersion () {
+function getExportVersion () {
   return `export const packageVersion = '${getPackageJson().version}'`
 }
 
@@ -118,9 +118,9 @@ ${getImportDocuments(documents)}
 
 Vue.use(PackageEntry)
 
-${genExportConfig()}
-${genExportDocuments(documents)}
-${genExportVersion()}
+${getExportConfig()}
+${getExportDocuments(documents)}
+${getExportVersion()}
 `
   
   outputFile(SET_DESKTOP_DEPLOY_FILE, code)

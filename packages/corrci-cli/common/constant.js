@@ -27,11 +27,18 @@ function pascalize (component) {
   )
 }
 
+function decamelize (str, sep = '-') {
+  return str
+    .replace(/([a-z\d])([A-Z])/g, `$1${sep}$2`)
+    .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, `$1${sep}$2`)
+    .toLowerCase()
+}
+
 // 导出文件
 function outputFile (filePath, content) {
   if (existsSync(filePath)) {
     const previousContent = readFileSync(filePath, 'utf-8')
-
+ 
     if (previousContent === content) {
       return
     }
@@ -46,4 +53,5 @@ function outputFile (filePath, content) {
 exports.removeExt = removeExt
 exports.normalizePath = normalizePath
 exports.pascalize = pascalize
+exports.decamelize = decamelize
 exports.outputFile = outputFile

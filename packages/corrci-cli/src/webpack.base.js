@@ -1,6 +1,3 @@
-// import { SITE_DESKTOP_SHARED_FILE } from '../common/constant'
-// import { CorrciCliSitePlugin } from '../compiler/corrci-cli-site-plugin'
-
 const path = require('path')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const chalk = require('chalk')
@@ -10,15 +7,18 @@ const webpack = require('webpack')
 const process = require('process')
 // 引入项目文件属性 
 const utils = require('./utils')
-const { SET_DESKTOP_DEPLOY_FILE } = require('../common/state') 
+const { 
+  SET_DESKTOP_DEPLOY_FILE,
+  SET_MOBILE_DEPLOY_FILE
+} = require('../common/state') 
 const { CorrciCliSitePlugin } = require('../compiler/corrci-cli-site-plugin')
 
 // 初始化 node Env
 utils.initNodeEnv()
 
 const entryPath = {
-  desktop: path.join(__dirname, '../site/desktop/main')
-  // mobile: path.join(__dirname, '../../../examples/mobile/main.js')
+  desktop: path.join(__dirname, '../site/desktop/main'),
+  mobile: path.join(__dirname, '../site/mobile/main')
 }
 
 const HTMLPlugin = [
@@ -33,19 +33,19 @@ const HTMLPlugin = [
       removeComments: true,
       collapseWhitespace: true
     }
+  }),
+  new HtmlWebpackPlugin({
+    template: path.resolve(__dirname, '../site/mobile/index.html'),
+    title: 'mobile page',
+    filename: 'mobile.html',
+    // publicPath: './mobile',
+    hash: false,
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true
+    }
   })
-  // new HtmlWebpackPlugin({
-  //   template: path.resolve(__dirname, '../../../examples/mobile/index.html'),
-  //   title: 'mobile page',
-  //   filename: 'mobile.html',
-  //   // publicPath: './mobile',
-  //   hash: false,
-  //   inject: true,
-  //   minify: {
-  //     removeComments: true,
-  //     collapseWhitespace: true
-  //   }
-  // })
 ]
 
 const CACHE_LOADER = {
@@ -64,6 +64,21 @@ const VUE_LOADER = {
   }
 }
 
+const PREPROCESSOR_LOADER = {
+  // 条件编译处理
+  loader: 'webpack-preprocessor-loader',
+  options: {
+    params: {
+      isVue: true,
+      isReact: false
+    }
+  }
+}
+
+const CORRCI_MD_LOADER = {
+  loader: path.resolve(__dirname, '../../corrci-md-loader/src/index.js')
+}
+
 // 模块
 const moduleConfig = () => ({
   rules: [
@@ -78,45 +93,13 @@ const moduleConfig = () => ({
       ],
       use: [
         'babel-loader',
-        { // 条件编译处理
-          loader: 'webpack-preprocessor-loader',
-          options: {
-            params: {
-              isVue: true,
-              isReact: false
-            }
-          }
-        }
+        PREPROCESSOR_LOADER
       ]
     },
     {
       test: /\.vue$/,
       use: [
-        {
-          loader: 'vue-loader',
-          // options: {
-          //   // 去除模板中的空格
-          //   preserveWhitespace: false,
-          //   loaders: [
-          //     'style-loader',
-          //     {
-          //       loader: 'css-loader',
-          //       options: {
-          //         modules: true
-          //       }
-          //     },
-          //     {
-          //       loader: 'sass-loader',
-          //       options: {
-          //         sourceMap: true
-          //       }
-          //     },
-          //     {
-          //       loader: 'less-loader'
-          //     }
-          //   ]
-          // }
-        }
+        VUE_LOADER
       ]
     },
     {
@@ -124,9 +107,7 @@ const moduleConfig = () => ({
       use: [
         CACHE_LOADER,
         VUE_LOADER,
-        {
-          loader: path.resolve(__dirname, '../../corrci-md-loader/src/index.js')
-        }
+        CORRCI_MD_LOADER
       ]
     },
     {
@@ -163,6 +144,7 @@ const resolveConfig = () => ({
     '@': path.resolve('src/app'),
     '@utils': path.resolve('src/utils'),
     '@base': path.resolve('src/base'),
+    'set-mobile-deploy': SET_MOBILE_DEPLOY_FILE,
     'set-desktop-deploy': SET_DESKTOP_DEPLOY_FILE
   }
 })

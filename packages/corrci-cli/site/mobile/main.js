@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import { scrollToAnchor } from './utils'
-import DemoPlayground from './components/DemoPlayground'
+import MobileBlock from './components/MobileBlock'
+import MobileSection from './components/MobileSection'
+import { scrollToAnchor } from '../desktop/utils'
 
 if (process.env.NODE_ENV !== 'production') {
   Vue.config.productionTip = false
 }
 
-Vue.component(DemoPlayground.name, DemoPlayground)
+Vue.component(MobileBlock.name, MobileBlock)
+Vue.component(MobileSection.name, MobileSection)
 
 new Vue({
   mounted () {
@@ -19,4 +21,4 @@ new Vue({
   render: h => h(App),
   router
   // store
-}).$mount('#app-desktop')
+}).$mount('#app-mobile')

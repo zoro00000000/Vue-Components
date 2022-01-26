@@ -5,39 +5,32 @@ const webpackBaseConf = require('./webpack.base')
 // 引入项目文件属性
 const config = require('../config')
 
+const styleLoader = name => {
+  const loaders = [
+    'vue-style-loader',
+    'css-loader',
+    'postcss-loader'
+  ]
+  if (name && ['sass', 'less'].includes(name)) {
+    loaders.push(`${name}-loader`)
+  }
+  return loaders
+}
+
 // 模块
 const modulesConfig = () => ({
   rules: [
     {
       test: /\.css$/,
-      use: [
-        'vue-style-loader',
-        {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 1
-          }
-        },
-        'postcss-loader'
-      ]
+      use: styleLoader()
     },
     {
       test: /\.(sa|sc)ss$/,
-      use: [
-        'vue-style-loader',
-        'css-loader',
-        'postcss-loader',
-        'sass-loader'
-      ]
+      use: styleLoader('sass')
     },
     {
       test: /\.less$/,
-      use: [
-        'vue-style-loader',
-        'css-loader',
-        'postcss-loader',
-        'less-loader'
-      ]
+      use: styleLoader('less')
     }
   ]
 })
@@ -47,7 +40,6 @@ const outputConfig = () => ({
   // 如果有项目名 输出单个项目
   // path: path.join(__dirname, '../../../../dist'),
   // filename: './js/[name].js',
-  // chunkFilename: './js/[name].js',
   chunkFilename: '[name].js',
   // 性能优化1
   pathinfo: false

@@ -14,6 +14,6 @@ module.exports = {
         "except": ["first-nested"],
         "ignore": ["after-comment"]
     } ],
-    "unit-whitelist": ["em", "rem", "%", "s", "px", "vw", "deg"]
+    "unit-whitelist": ["em", "rem", "%", "s", "px", "vw", "vh", "deg"]
   }
 }

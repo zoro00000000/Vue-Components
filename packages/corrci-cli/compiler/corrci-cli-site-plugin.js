@@ -8,6 +8,7 @@ const {
 
 const { setPackageEntry } = require('./set-package-entry')
 const { setDesktopDeploy } = require('./set-desktop-deploy')
+const { setMobileDeploy } = require('./set-mobile-deploy')
 
 const PLUGIN_NAME = 'CorrciCliSitePlugin'
 
@@ -17,6 +18,8 @@ async function setSiteEntry () {
     setPackageEntry({
       outputPath: PACKAGE_ENTRY_FILE
     })
+    // mobile-deploy.js
+    setMobileDeploy()
     // desktop-deploy.js
     setDesktopDeploy()
     resolve()

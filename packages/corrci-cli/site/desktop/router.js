@@ -1,6 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { config, documents } from 'set-desktop-deploy'
+import { isMobile, decamelize } from '../common'
+import { getLang, setDefaultLang } from '../common/locales'
+import { listenToSyncPath, syncPathToChild } from '../common/iframe-router'
+
+if (isMobile) {
+  window.location.replace(`mobile.html${window.location.hash}`)
+}
+
+const { locales, defaultLang } = config.site
+
+setDefaultLang(defaultLang)
 
 Vue.use(VueRouter)
 
@@ -11,16 +22,6 @@ Vue.use(VueRouter)
 //   routerBase = `/${defaultLang}/release/corrciComponents`
 //   window.location.host === 'minner.jr.jd.com' && (routerBase = `/${defaultLang}/experience/corrciComponents`)
 // }
-
-/*
- * 驼峰处理
- */
-function decamelize (str, sep = '-') {
-  return str
-    .replace(/([a-z\d])([A-Z])/g, `$1${sep}$2`)
-    .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, `$1${sep}$2`)
-    .toLowerCase()
-}
 
 const parseName = name => {
   if (name.indexOf('_') !== -1) {
@@ -39,9 +40,32 @@ const parseName = name => {
   }
 }
 
+function getLangFromRoute (route) {
+  const lang = route.path.split('/')[1]
+  const langs = Object.keys(locales)
+
+  if (langs.indexOf(lang) !== -1) {
+    return lang
+  }
+
+  return getLang()
+}
+
 const getRoutes = () => {
   const routes = []
   const names = Object.keys(documents)
+
+  if (locales) {
+    routes.push({
+      path: '*',
+      redirect: route => `/${getLangFromRoute(route)}/`
+    })
+  } else {
+    routes.push({
+      path: '*',
+      redirect: '/'
+    })
+  }
 
   names.forEach(name => {
     const { component, lang } = parseName(name)
@@ -100,9 +124,11 @@ const routerPage = new VueRouter({
   }
 })
 
+export default routerPage
+
 // 新增路由拦截
 routerPage.beforeEach((to, from, next) => {
-  console.log('路由拦截beforeEach：', to, from)
+  // console.log('路由拦截beforeEach：', to, from)
   // 路由发生变化修改页面title
   if (to.meta && to.meta.title) {
     document.title = to.meta.title
@@ -112,7 +138,12 @@ routerPage.beforeEach((to, from, next) => {
 })
 
 routerPage.afterEach((to, from) => {
-  console.log('路由拦截afterEach：', to, from)
+  // console.log('路由拦截afterEach：', to, from)
+  Vue.nextTick(() => {
+    syncPathToChild(routerPage)
+  })
 })
 
-export default routerPage
+listenToSyncPath(routerPage)
+
+// window.vueRouter = routerPage

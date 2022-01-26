@@ -34,6 +34,7 @@ const CORRCI_CONFIG_FILE = join(ROOT, 'corrci.config.js')
 const CONFIG_DIR = join(__dirname, 'corrci-cli', '../../config')
 const PACKAGE_ENTRY_FILE = join(CONFIG_DIR, 'package-entry.js')
 const SET_DESKTOP_DEPLOY_FILE = join(CONFIG_DIR, 'desktop-deploy.js')
+const SET_MOBILE_DEPLOY_FILE = join(CONFIG_DIR, 'mobile-deploy.js')
 
 const ENTRY_EXTS = ['js', 'ts', 'tsx', 'jsx', 'vue']
 
@@ -44,6 +45,7 @@ exports.PACKAGE_JSON_FILE = PACKAGE_JSON_FILE
 exports.CORRCI_CONFIG_FILE = CORRCI_CONFIG_FILE
 exports.PACKAGE_ENTRY_FILE = PACKAGE_ENTRY_FILE
 exports.SET_DESKTOP_DEPLOY_FILE = SET_DESKTOP_DEPLOY_FILE
+exports.SET_MOBILE_DEPLOY_FILE = SET_MOBILE_DEPLOY_FILE
 exports.ENTRY_EXTS = ENTRY_EXTS
 
 function getPackageJson () {

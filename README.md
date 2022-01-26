@@ -1,21 +1,22 @@
-# corrci-ui #
+# CORRCI COMPONENTS
+
 ❌✅❎❗️❕ℹ️
 
-# 柯基UI，谐音科技，基于金融消金业务沉淀的中型基础UI组件，组件带有相应的业务逻辑，无脑式直接引用。 ##
+### 柯基UI，谐音科技，基于金融消金业务沉淀的中型基础UI组件，组件带有相应的业务逻辑，无脑式直接引用。
 
 ## 项目结构 ##
 
 ```
-━━Vue Components project━━
+━━ Corrci Components ━━
     ┣━components
-    ┃   ┣━ com-demo
-    ┃   ┣━ style
-    ┃   ┗━ README.md
-    ┣━examples
-    ┃   ┣━ common
-    ┃   ┣━ desktop
-    ┃   ┣━ mobile
-    ┃   ┗━ README.md
+    ┃   ┣━ demo
+    ┃   ┣━ home
+    ┃   ┗━ test
+    ┣━dist
+    ┣━docs
+    ┃   ┗━ markdown
+    ┃   ┃   ┣━ install.zh-CN.md
+    ┃   ┗━  ┗━ quickstart.zh-CN.md
     ┣━packages
     ┃   ┣━ corrci-cli
     ┃   ┃   ┣━ config

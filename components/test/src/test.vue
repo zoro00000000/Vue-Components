@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ 'test 组件！！！！' }}}
+    {{ 'test 组件 content ！！！！' }}}
   </div>
 </template>
 
