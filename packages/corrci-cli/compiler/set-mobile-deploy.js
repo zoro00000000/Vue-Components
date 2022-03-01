@@ -2,7 +2,7 @@ const { join } = require('path')
 const { 
   existsSync,
   readdirSync
-} = require('fs')
+} = require('fs-extra')
 const { 
   SRC_DIR,
   SET_MOBILE_DEPLOY_FILE,

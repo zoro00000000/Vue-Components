@@ -1,14 +1,15 @@
-import Demo from '/Users/haoliang6/code/project/Vue-Components/components/demo'
-import Home from '/Users/haoliang6/code/project/Vue-Components/components/home'
-import Test from '/Users/haoliang6/code/project/Vue-Components/components/test'
-  
+import Demo from '../components/demo'
+import Home from '../components/home'
+import Test from '../components/test'
+
+const version = '1.0.1'
+
 function install (Vue) {
   const components = [
     Demo,
     Home,
     Test
   ]
-
   components.forEach(item => {
     if (item.install) {
       Vue.use(item)
@@ -23,9 +24,12 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export {
-  install
+  install,
+  Demo,
+  Home,
+  Test
 }
-
 export default {
-  install
+  install,
+  version
 }

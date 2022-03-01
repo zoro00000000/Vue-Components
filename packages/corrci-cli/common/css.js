@@ -1,5 +1,5 @@
-import { get } from 'lodash'
-import { getCorrciConfig } from './constant'
+const { get } = require('lodash')
+const { getCorrciConfig } = require('./state')
 
 function getCssLang () {
   const corrciConfig = getCorrciConfig()
@@ -12,4 +12,14 @@ function getCssLang () {
   return preprocessor
 }
 
-export const CSS_LANG = getCssLang()
+const CSS_LANG = getCssLang()
+
+const IMPORT_STYLE_RE = /import\s+?(?:(?:".*?")|(?:'.*?'))[\s]*?(?:;|$|)/g
+
+// "import 'a.less';" => "import 'a.css';"
+function replaceCssImportExt (code) {
+  return code.replace(IMPORT_STYLE_RE, str => str.replace(`.${CSS_LANG}`, '.css'))
+}
+
+exports.CSS_LANG = CSS_LANG
+exports.replaceCssImportExt = replaceCssImportExt

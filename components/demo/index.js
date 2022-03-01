@@ -1,4 +1,4 @@
-import CoriDemoCom from './src/demo'
+import CoriDemoCom from './src/demo.vue'
 
 CoriDemoCom.install = function (Vue) {
   Vue.component(CoriDemoCom.name, CoriDemoCom)

@@ -2,8 +2,8 @@ const {
   // readdirSync,
   existsSync,
   readFileSync,
-  writeFile
-} = require('fs')
+  outputFileSync
+} = require('fs-extra')
 
 const camelizeRE = /-(\w)/g
 const pascalizeRE = /(\w)(\w*)/g
@@ -44,10 +44,7 @@ function outputFile (filePath, content) {
     }
   }
 
-  writeFile(filePath, content, err => {
-    if (err) throw err
-    console.log(`生成文件成功！！！！${filePath}`)
-  })
+  outputFileSync(filePath, content)
 }
 
 exports.removeExt = removeExt

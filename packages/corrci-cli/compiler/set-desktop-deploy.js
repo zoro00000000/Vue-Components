@@ -1,7 +1,7 @@
 const { 
   readdirSync,
   existsSync
-} = require('fs')
+} = require('fs-extra')
 const { 
   join,
   parse 

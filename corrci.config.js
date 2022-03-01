@@ -1,5 +1,11 @@
 module.exports = {
   name: 'corrci',
+  build: {
+    skipInstall: ['lazyload'],
+    vetur: {
+      tagPrefix: 'cor-',
+    },
+  },
   site: {
     defaultLang: 'zh-CN',
     version: [

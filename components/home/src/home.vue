@@ -1,12 +1,12 @@
 <template>
   <div>
-    {{ 'demo 组件 content ！！！！' }}}
+    {{ 'home 组件 content ！！！！' }}}
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CoriDemoCom',
+  name: 'CoriHomeCom',
   data () {
     return {}
   }

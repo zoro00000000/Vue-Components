@@ -5,10 +5,7 @@ const {
 } = require('path')
 const {
   existsSync
-  // readdirSync,
-  // readFileSync,
-  // writeFile
-} = require('fs')
+} = require('fs-extra')
 const { get } = require('lodash')
 
 // 查找 corrci.config.js 配置文件
@@ -27,6 +24,9 @@ function findRootDir (dir) {
 
 const CWD = process.cwd()
 const ROOT = findRootDir(CWD)
+const COMPONENT_DIR = join(ROOT, 'components')
+const ES_DIR = join(ROOT, 'es')
+const LIB_DIR = join(ROOT, 'lib')
 const DOCS_DIR = join(ROOT, 'docs')
 const PACKAGE_JSON_FILE = join(ROOT, 'package.json')
 const CORRCI_CONFIG_FILE = join(ROOT, 'corrci.config.js')
@@ -39,6 +39,9 @@ const SET_MOBILE_DEPLOY_FILE = join(CONFIG_DIR, 'mobile-deploy.js')
 const ENTRY_EXTS = ['js', 'ts', 'tsx', 'jsx', 'vue']
 
 exports.ROOT = ROOT
+exports.COMPONENT_DIR = COMPONENT_DIR
+exports.ES_DIR = ES_DIR
+exports.LIB_DIR = LIB_DIR
 exports.DOCS_DIR = DOCS_DIR
 exports.CONFIG_DIR = CONFIG_DIR
 exports.PACKAGE_JSON_FILE = PACKAGE_JSON_FILE

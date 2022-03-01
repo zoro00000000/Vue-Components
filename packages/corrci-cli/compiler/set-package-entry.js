@@ -4,7 +4,7 @@ const {
   readdirSync,
   existsSync,
   readFileSync
-} = require('fs')
+} = require('fs-extra')
 
 const {
   SRC_DIR,
