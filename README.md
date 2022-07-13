@@ -72,7 +72,7 @@
     ┣━  package.json
     ┣━  package-lock.json
     ┣━  postcss.config.js
-    ┣━  stylelint.config.js
+    ┣━  stylelintrc
     ┗━  README.md
 ```
 

@@ -1,5 +1,5 @@
 {
-  "name": "Corrci Tools",
+  "name": "corrcitools",
   "version": "1.0.0",
   "description": "A tools for javascript",
   "main": "lib/index.js",
@@ -15,15 +15,11 @@
     "dev": "sudo cross-env NODE_ENV=development VUE_APP_BUILD_ENV=dev node ./packages/corrci-cli/src/server.js",
     "start": "cross-env NODE_ENV=development VUE_APP_BUILD_ENV=dev node ./packages/corrci-cli/src/server.js",
     "build": "cross-env NODE_ENV=production node packages/corrci-cli/src/build.js",
-    "add:git-hooks": "node git-hooks/index.js",
+    "prepare": "husky install",
     "lint": "npm run lint:es && npm run lint:style",
-    "lint:es": "eslint modules --config .eslintrc.js --ext .ts,.tsx,.js,.vue",
-    "lint:style": "stylelint modules/**/*.css .stylelintrc --ext .vue,.css,.less,.scss"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
+    "lint:es": "eslint components --config .eslintrc.js --ext .ts,.tsx,.js,.vue",
+    "lint:style": "stylelint components/**/*.css .stylelintrc",
+    "lintstaged": "lint-staged"
   },
   "lint-staged": {
     "*.md": "prettier --write",
@@ -99,6 +95,7 @@
     "js-conditional-compile-loader": "^1.0.14",
     "less": "^4.1.2",
     "less-loader": "^10.0.1",
+    "lint-staged": "^13.0.3",
     "loader-utils": "^1.2.3",
     "lodash": "^4.17.21",
     "markdown-it": "^12.2.0",
