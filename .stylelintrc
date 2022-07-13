@@ -5,6 +5,7 @@
     "comment-empty-line-before": [ "always", {
         "ignore": ["stylelint-commands", "between-comments"]
     } ],
+    "declaration-colon-space-after": "always",
     "unit-whitelist": ["em", "rem", "%", "s", "px", "vw", "vh", "deg"]
   }
 }
