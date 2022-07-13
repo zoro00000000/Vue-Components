@@ -6,7 +6,7 @@ const {
   // PACKAGE_STYLE_FILE
 } = require('../common/state')
 
-const { setPackageEntry } = require('./set-package-entry')
+const { setPackageEntry } = require('./make-package-entry')
 const { setDesktopDeploy } = require('./set-desktop-deploy')
 const { setMobileDeploy } = require('./set-mobile-deploy')
 

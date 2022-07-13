@@ -52,7 +52,7 @@ function getImports (components, options) {
     .join('\n')
 }
 
-function setPackageEntry (options) {
+function makePackageEntry (options) {
   const componentNames = getComponents()
   const corrciConfig = getCorrciConfig()
   const skipInstall = get(corrciConfig, 'build.skipInstall', []).map(pascalize)
@@ -91,4 +91,4 @@ export default {
   outputFile(options.outputPath, content)
 }
 
-exports.setPackageEntry = setPackageEntry
+exports.makePackageEntry = makePackageEntry

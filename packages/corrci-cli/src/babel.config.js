@@ -1,11 +1,13 @@
 const babelConfig = function (api) {
+  // 动态监听 babel.config.js   
   if (api) {
-    // TODO: 动态监听 babel.config.js【重点】  
     api.cache.never();
   }
 
   const { BABEL_MODULE } = process.env
   const useESModules = BABEL_MODULE !== 'commonjs'
+  
+  console.log('----ENV----:', BABEL_MODULE)
   
   return {
     presets: [
@@ -40,11 +42,11 @@ const babelConfig = function (api) {
         'legacy': true
       }],
       'jsx-v-model',
-      // ['import', {
-      //   libraryName: 'vant',
-      //   libraryDirectory: 'es',
-      //   style: true
-      // }, 'vant']
+      ['import', {
+        libraryName: 'vant',
+        libraryDirectory: 'es',
+        style: true
+      }, 'vant']
     ]
   }
 }

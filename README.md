@@ -1,8 +1,8 @@
-# CORRCI COMPONENTS
+# CORRCI TOOLS
 
-❌✅❎❗️❕ℹ️
+❌ ✅ ❎ ❗ ️❕ ℹ️
 
-### 柯基UI，谐音科技，基于金融消金业务沉淀的中型基础UI组件，组件带有相应的业务逻辑，无脑式直接引用。
+### 柯基工具，谐音科技，基于平时业务中技术沉淀，通用工具方法。
 
 ## 项目结构 ##
 
@@ -17,6 +17,8 @@
     ┃   ┗━ markdown
     ┃   ┃   ┣━ install.zh-CN.md
     ┃   ┗━  ┗━ quickstart.zh-CN.md
+    ┣━es esmodule 版本
+    ┣━lib commonjs 版本
     ┣━packages
     ┃   ┣━ corrci-cli
     ┃   ┃   ┣━ config
@@ -60,8 +62,6 @@
     ┃   ┗━  ┗━ webviewTester webview环境监测方法
     ┣━static
     ┃   ┗━ 无需构建的静态文件
-    ┣━template
-    ┃   ┗━ 项目基础模板
     ┣━  .browserslistrc
     ┣━  .editorconfig
     ┣━  .env
@@ -69,8 +69,6 @@
     ┣━  .eslintrc.js
     ┣━  .gitgnore
     ┣━  .prettierignore
-    ┣━  .babel.config.js
-    ┣━  compoments.json
     ┣━  package.json
     ┣━  package-lock.json
     ┣━  postcss.config.js
