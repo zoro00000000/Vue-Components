@@ -14,11 +14,14 @@
   "scripts": {
     "dev": "sudo cross-env NODE_ENV=development VUE_APP_BUILD_ENV=dev node ./packages/corrci-cli/src/server.js",
     "start": "cross-env NODE_ENV=development VUE_APP_BUILD_ENV=dev node ./packages/corrci-cli/src/server.js",
-    "build": "cross-env NODE_ENV=production node packages/corrci-cli/src/build.js"
+    "build": "cross-env NODE_ENV=production node packages/corrci-cli/src/build.js",
+    "lint": "npm run lint:es && npm run lint:style",
+    "lint:es": "eslint modules --config .eslintrc.js --ext .ts,.tsx,.js,.vue",
+    "lint:style": "stylelint modules/**/*.css .stylelintrc --ext .vue,.css,.less,.scss"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm run lint"
     }
   },
   "lint-staged": {
